@@ -5,7 +5,7 @@ import { LOGO_BLUE } from "../images";
 
 function AuthNavbar() {
   return (
-    <nav className="flex justify-between items-center p-4 bg-blue-500">
+    <header className="flex justify-between items-center p-4 bg-blue-500">
       <div className="flex justify-center items-center gap-2">
         <LazyLoadImg
           src={LOGO_BLUE}
@@ -20,7 +20,7 @@ function AuthNavbar() {
         </h1>
       </div>
       <ThemeToggleBtn />
-    </nav>
+    </header>
   );
 }
 

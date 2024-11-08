@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { resolve } from "path";
 
 const nextConfig: NextConfig = {
   images: {
@@ -29,24 +30,6 @@ const nextConfig: NextConfig = {
     GOOGLE_OAUTH_CLIENTSECRET: process.env.GOOGLE_OAUTH_CLIENTSECRET,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DOMAIN: process.env.DOMAIN,
-  },
-  webpack(conf) {
-    conf.module.rules.push({
-      test: /\.sql$/,
-      use: "raw-loader",
-    });
-
-    return conf;
-  },
-  experimental: {
-    turbo: {
-      rules: {
-        "*.sql": {
-          loaders: ["raw-loader"],
-          as: "*.js",
-        },
-      },
-    },
   },
 };
 

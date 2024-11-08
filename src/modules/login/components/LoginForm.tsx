@@ -30,7 +30,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
 
   useWriteQueries(0, emailRef, passwordRef);
 
-  const [{ message, data, error, code }, formAction] =
+  const [{ message, data, error, code }, form_action] =
     useServerAction(login_action);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
     <Form
       className="space-y-4 md:space-y-6"
       id="login-form"
-      action={formAction}
+      action={form_action}
     >
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label
@@ -69,7 +69,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
             defaultValue={defaultValue?.identifier || ""}
             pattern="^\S{3,}$"
             title="identifier must be at least 3 characters long and must not contain spaces."
-            className="appearance-none bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:blue-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="appearance-none bg-gray-50 text-gray-900 sm:text-sm rounded-lg focus:blue-600 focus:border-teal-600 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
       </div>
@@ -94,7 +94,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
         <div className="flex items-start"></div>
         <Link
           prefetch
-          href="/forget-password"
+          href="/auth/forget-password"
           className="text-sm font-medium text-blue-500 hover:underline"
         >
           Forgot password?
@@ -118,7 +118,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
         Not register yet?{" "}
         <Link
           prefetch
-          href="/register"
+          href="/auth/register"
           className="font-medium text-blue-500 hover:underline"
         >
           Sign up

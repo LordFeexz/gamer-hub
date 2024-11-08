@@ -5,13 +5,14 @@ import Link from "next/link";
 import AuthNavbar from "@/components/common/AuthNavbar";
 import Hydrate from "./components/Hydrate";
 import LoginForm from "./components/LoginForm";
+import { memo } from "react";
 
 export interface LoginPageProps {
   identifier?: string;
   password?: string;
 }
 
-export default function LoginPage({ identifier, password }: LoginPageProps) {
+function LoginPage({ identifier, password }: LoginPageProps) {
   return (
     <>
       <Hydrate />
@@ -45,3 +46,5 @@ export default function LoginPage({ identifier, password }: LoginPageProps) {
     </>
   );
 }
+
+export default memo(LoginPage);

@@ -26,3 +26,16 @@ export type ServerAction<T = any> = (
   prev: DefaultResponse<T>,
   formData: FormData
 ) => Promise<DefaultResponse<T>>;
+
+export type PageProps<
+  params = Record<string, string>,
+  searchParams = Record<string, string>
+> = {
+  params: Promise<params>;
+  searchParams: Promise<Partial<searchParams>>;
+};
+
+export interface BasePagination {
+  page?: number;
+  limit?: number;
+}

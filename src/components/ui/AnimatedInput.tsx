@@ -64,7 +64,7 @@ const AnimatedInput = forwardRef<
           "disabled:cursor-not-allowed disabled:opacity-50",
           "dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]",
           "group-hover/input:shadow-none transition duration-400",
-          "flex h-10 w-full border-none bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent",
+          "flex h-10 w-full border-none dark:bg-gray-700 bg-gray-50 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent border border-gray-300 dark:border-gray-600 dark:placeholder-gray-400",
           className
         )}
         ref={ref}

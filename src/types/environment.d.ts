@@ -5,6 +5,8 @@ export declare global {
       DATABASE_URL: string;
       GOOGLE_OAUTH_CLIENTID: string;
       GOOGLE_OAUTH_CLIENT_SECRET: string;
+      MAILER_EMAIL: string;
+      MAILER_PASSWORD: string;
     }
   }
 }

@@ -6,8 +6,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function sanitize_search_params(params: Record<string, string>) {
+export async function sanitize_search_params<T extends object = {}>(
+  params: Promise<T>
+) {
   return Object.fromEntries(
-    Object.entries(params).map(([key, value]) => [key, sanitize(value)])
+    Object.entries((await params) || {}).map(([key, value]) => [
+      key,
+      sanitize(value),
+    ])
   );
 }

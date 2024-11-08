@@ -59,7 +59,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           className={cn(
             required && "after:content-['*'] after:ml-0.5 after:text-red-500",
             labelClass,
-            "block"
+            "block text-neutral-900 dark:text-neutral-300"
           )}
         >
           {label}

@@ -11,14 +11,13 @@ export const query = async <T extends QueryResultRow>(
   sql: string,
   values: any[],
   fetcher: Pool | PoolClient = pool
-) => await fetcher.query<T>(sql, values);
+) => (await fetcher.query<T>(sql, values))?.rows ?? [];
 
 export const fetch_one = async <T extends QueryResultRow>(
   sql: string,
   values: any[],
   fetcher: Pool | PoolClient = pool
-): Promise<T | null> =>
-  (await query<T>(sql, values, fetcher))?.rows?.[0] ?? null;
+): Promise<T | null> => (await query<T>(sql, values, fetcher))?.[0] ?? null;
 
 export const get_client = async () => pool.connect();
 
