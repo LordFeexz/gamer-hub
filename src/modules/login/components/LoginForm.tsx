@@ -24,14 +24,13 @@ export interface LoginFormProps {
 }
 
 function LoginForm({ defaultValue }: LoginFormProps) {
+  const [{ message, data, error, code }, form_action] =
+    useServerAction(login_action);
   const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   useWriteQueries(0, emailRef, passwordRef);
-
-  const [{ message, data, error, code }, form_action] =
-    useServerAction(login_action);
 
   useEffect(() => {
     if (!data) return;

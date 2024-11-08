@@ -28,15 +28,14 @@ function RegisterForm({
   password,
   confirmPassword,
 }: RegisterFormProps) {
+  const [{ code, message, error }, form_action] =
+    useServerAction(register_action);
   const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   useWriteQueries(0, emailRef, usernameRef, passwordRef, confirmPasswordRef);
-
-  const [{ code, message, error }, form_action] =
-    useServerAction(register_action);
 
   useEffect(() => {
     if (code === 200 && message === USER_CREATED_RESPONSE)

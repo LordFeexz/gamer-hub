@@ -1,6 +1,5 @@
 import type { Session } from "next-auth";
 import type { ReactNode } from "react";
-import type { z, ZodError, ZodType } from "zod";
 
 export interface ChildrenProps {
   readonly children: ReactNode;
@@ -11,7 +10,6 @@ export interface CustomSession extends Session {
     id?: string;
     name?: string | null;
     access_token?: string | null;
-    isVerified: boolean;
   };
 }
 
