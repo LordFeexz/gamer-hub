@@ -7,14 +7,14 @@ import PasswordInput from "@/components/common/PasswordInput";
 import SubmitBtn from "@/components/common/SubmitBtn";
 import Link from "next/link";
 import { login_action } from "../action";
-import { memo, useEffect, useRef } from "react";
-import useWriteQueries from "@/hooks/useWriteQueries";
+import { memo, useEffect } from "react";
 import useServerAction from "@/hooks/useServerAction";
 import DisplayError from "@/components/common/DisplayError";
 import ErrorMessage from "@/components/common/ErrorMessage";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import GoogleLogin from "./GoogleLogin";
+import useUpdateQueries from "@/hooks/useUpdateQueries";
 
 export interface LoginFormProps {
   defaultValue?: {
@@ -27,17 +27,14 @@ function LoginForm({ defaultValue }: LoginFormProps) {
   const [{ message, data, error, code }, form_action] =
     useServerAction(login_action);
   const router = useRouter();
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
-  useWriteQueries(0, emailRef, passwordRef);
+  const onChangeHandler = useUpdateQueries(300);
 
   useEffect(() => {
     if (!data) return;
 
     (async () => {
       await signIn("credentials", { access_token: data, redirect: false });
-      router.replace("/");
+      router.replace("/home");
     })();
   }, [data, router]);
 
@@ -59,7 +56,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
             <DisplayError messages={error?.identifier} />
           )}
           <AnimatedInput
-            ref={emailRef}
+            onChange={onChangeHandler}
             id="identifier"
             name="identifier"
             placeholder="JohnDoe / JohnDoe@gmail.com"
@@ -73,7 +70,7 @@ function LoginForm({ defaultValue }: LoginFormProps) {
         </div>
       </div>
       <PasswordInput
-        ref={passwordRef}
+        onChange={onChangeHandler}
         defaultValue={defaultValue?.password || ""}
         id="password"
         name="password"

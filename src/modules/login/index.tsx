@@ -2,7 +2,7 @@ import Container from "@/components/common/Container";
 import LazyLoadImg from "@/components/common/LazyLoadImage";
 import { LOGO_BLUE } from "@/components/images";
 import Link from "next/link";
-import AuthNavbar from "@/components/common/AuthNavbar";
+import AuthNavbar from "@/components/layouts/AuthNavbar";
 import Hydrate from "./components/Hydrate";
 import LoginForm from "./components/LoginForm";
 import { memo } from "react";

@@ -3,11 +3,14 @@
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "lucide-react";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import useMount from "@/hooks/useMounted";
 import { cn } from "@/lib/utils";
+import type { OptionClassName } from "@/interfaces/component";
 
-export default function ThemeToggleBtn() {
+export interface ThemeToggleBtnProps extends OptionClassName {}
+
+function ThemeToggleBtn({ className }: ThemeToggleBtnProps) {
   const { setTheme, resolvedTheme } = useTheme();
 
   const toggleTheme = useCallback(() => {
@@ -26,7 +29,8 @@ export default function ThemeToggleBtn() {
       className={cn(
         "rounded-xl p-2",
         "border dark:stroke-slate-950 stroke-gray-100",
-        "hover:cursor-pointer hover:scale-95 duration-300 transition-transform"
+        "hover:cursor-pointer hover:scale-95 duration-300 transition-transform",
+        className
       )}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -41,3 +45,5 @@ export default function ThemeToggleBtn() {
     </motion.button>
   );
 }
+
+export default memo(ThemeToggleBtn);

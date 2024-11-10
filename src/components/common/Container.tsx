@@ -1,4 +1,4 @@
-import type { ChildrenProps } from "@/interfaces";
+import type { ChildrenProps } from "@/interfaces/component";
 import { cn } from "@/lib/utils";
 import { memo } from "react";
 

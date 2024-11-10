@@ -1,4 +1,4 @@
-import { isInIndonesia } from "@/helpers/global";
+import { is_in_indonesia } from "@/helpers/global";
 import { useEffect, useState } from "react";
 
 export default function useInIndonesia() {
@@ -8,7 +8,7 @@ export default function useInIndonesia() {
     if ("geolocation" in navigator)
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
-        setIsIn(isInIndonesia(latitude, longitude));
+        setIsIn(is_in_indonesia(latitude, longitude));
       });
   }, []);
 

@@ -5,12 +5,12 @@ import SubmitBtn from "@/components/common/SubmitBtn";
 import useServerAction from "@/hooks/useServerAction";
 import type { CustomSession } from "@/interfaces";
 import Form from "next/form";
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { forget_password_action } from "../action";
 import DisplayError from "@/components/common/DisplayError";
 import ErrorMessage from "@/components/common/ErrorMessage";
-import useWriteQueries from "@/hooks/useWriteQueries";
 import useInIndonesia from "@/hooks/useInIndonesia";
+import useUpdateQueries from "@/hooks/useUpdateQueries";
 
 export interface ForgetPasswordFormProps {
   session: CustomSession | null;
@@ -21,8 +21,7 @@ function ForgetPasswordForm({ session }: ForgetPasswordFormProps) {
     forget_password_action
   );
 
-  const emailRef = useRef<HTMLInputElement>(null);
-  useWriteQueries(0, emailRef);
+  const onChangeHandler = useUpdateQueries(300);
 
   const isIn = useInIndonesia();
 
@@ -43,7 +42,7 @@ function ForgetPasswordForm({ session }: ForgetPasswordFormProps) {
         />
         {!session && (
           <EmailForm
-            ref={emailRef}
+            onChange={onChangeHandler}
             className="py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm"
             required
             name="email"

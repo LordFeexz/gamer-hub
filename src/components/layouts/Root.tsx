@@ -1,4 +1,5 @@
-import type { ChildrenProps } from "@/interfaces";
+import type { Lang } from "@/interfaces";
+import type { ChildrenProps } from "@/interfaces/component";
 import "@/components/styles/globals.css";
 import "aos/dist/aos.css";
 import localFont from "next/font/local";
@@ -30,7 +31,7 @@ const sora = Sora({
 });
 
 export interface RootLayoutProps extends ChildrenProps {
-  lang?: "en" | "id";
+  lang?: Lang;
 }
 
 function RootLayout({ children, lang = "en" }: RootLayoutProps) {

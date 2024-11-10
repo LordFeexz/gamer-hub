@@ -2,12 +2,12 @@
 
 import useServerAction from "@/hooks/useServerAction";
 import Form from "next/form";
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { reset_password_action } from "../action";
 import SubmitBtn from "@/components/common/SubmitBtn";
 import PasswordInput from "@/components/common/PasswordInput";
 import ErrorMessage from "@/components/common/ErrorMessage";
-import useWriteQueries from "@/hooks/useWriteQueries";
+import useUpdateQueries from "@/hooks/useUpdateQueries";
 
 export interface ResetPasswordFormProps {
   token: string;
@@ -18,9 +18,7 @@ function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     reset_password_action
   );
 
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  useWriteQueries(0, passwordRef, confirmPasswordRef);
+  const onChangeHandler = useUpdateQueries(300);
 
   return (
     <Form
@@ -35,7 +33,7 @@ function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         defaultValue={token}
       />
       <PasswordInput
-        ref={passwordRef}
+        onChange={onChangeHandler}
         errors={error?.password}
         id="password"
         name="password"
@@ -47,7 +45,7 @@ function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         labelClass="mb-2 text-sm font-medium text-gray-900 dark:text-white"
       />
       <PasswordInput
-        ref={confirmPasswordRef}
+        onChange={onChangeHandler}
         errors={error?.confirmPassword}
         id="confirmPassword"
         name="confirmPassword"

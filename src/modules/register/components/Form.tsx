@@ -6,14 +6,14 @@ import AnimatedInput from "@/components/ui/AnimatedInput";
 import { Label } from "@/components/ui/label";
 import useServerAction from "@/hooks/useServerAction";
 import Form from "next/form";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect } from "react";
 import { register_action } from "../action";
-import useWriteQueries from "@/hooks/useWriteQueries";
 import SubmitBtn from "@/components/common/SubmitBtn";
 import DisplayError from "@/components/common/DisplayError";
 import ErrorMessage from "@/components/common/ErrorMessage";
 import { useRouter } from "next/navigation";
 import { USER_CREATED_RESPONSE } from "../constant";
+import useUpdateQueries from "@/hooks/useUpdateQueries";
 
 export interface RegisterFormProps {
   username: string;
@@ -31,11 +31,8 @@ function RegisterForm({
   const [{ code, message, error }, form_action] =
     useServerAction(register_action);
   const router = useRouter();
-  const emailRef = useRef<HTMLInputElement>(null);
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  useWriteQueries(0, emailRef, usernameRef, passwordRef, confirmPasswordRef);
+
+  const onChangeHandler = useUpdateQueries();
 
   useEffect(() => {
     if (code === 200 && message === USER_CREATED_RESPONSE)
@@ -56,7 +53,7 @@ function RegisterForm({
             <DisplayError messages={error.username} />
           )}
           <AnimatedInput
-            ref={usernameRef}
+            onChange={onChangeHandler}
             id="username"
             name="username"
             placeholder="John Doe"
@@ -73,7 +70,7 @@ function RegisterForm({
       <EmailForm
         errors={error?.email}
         defaultValue={email}
-        ref={emailRef}
+        onChange={onChangeHandler}
         id="email"
         name="email"
         required
@@ -85,7 +82,7 @@ function RegisterForm({
       <PasswordInput
         errors={error?.password}
         defaultValue={password}
-        ref={passwordRef}
+        onChange={onChangeHandler}
         id="password"
         name="password"
         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
@@ -99,7 +96,7 @@ function RegisterForm({
       <PasswordInput
         errors={error?.confirmPassword}
         defaultValue={confirmPassword}
-        ref={confirmPasswordRef}
+        onChange={onChangeHandler}
         required
         id="confirmPassword"
         name="confirmPassword"

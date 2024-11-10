@@ -1,9 +1,6 @@
 import type { Session } from "next-auth";
-import type { ReactNode } from "react";
 
-export interface ChildrenProps {
-  readonly children: ReactNode;
-}
+export type Lang = "en" | "id";
 
 export interface CustomSession extends Session {
   user?: {
@@ -30,10 +27,10 @@ export type PageProps<
   searchParams = Record<string, string>
 > = {
   params: Promise<params>;
-  searchParams: Promise<Partial<searchParams>>;
+  searchParams: Promise<Partial<searchParams> & { lang: Lang }>;
 };
 
 export interface BasePagination {
-  page?: number;
-  limit?: number;
+  page?: number | string;
+  limit?: number | string;
 }

@@ -1,6 +1,6 @@
 import { memo } from "react";
 import Hydrate from "./components/Hydrate";
-import AuthNavbar from "@/components/common/AuthNavbar";
+import AuthNavbar from "@/components/layouts/AuthNavbar";
 import Container from "@/components/common/Container";
 import LazyLoadImg from "@/components/common/LazyLoadImage";
 import { LOGO_BLUE } from "@/components/images";
